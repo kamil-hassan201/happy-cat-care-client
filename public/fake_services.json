@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Dog Walking Service",
+        "details": "We provide individualized daily dog walking that is tailored to fit your",
+        "image": "https://media.istockphoto.com/photos/close-up-owner-and-labrador-retriever-dog-walking-together-in-the-picture-id1272611284?b=1&k=20&m=1272611284&s=170667a&w=0&h=KBqk00m9fkt0sUtEMep3Wq4kbrvKrKb7Hsf2Ygt3wWw=",
+        "price": 79
+    },
+    {
+        "name": "Daily visits service",
+        "details": "Our daily pet visits make sure your pet will get the same care as usual.",
+        "image": "https://media.istockphoto.com/photos/female-patient-hugging-a-therapy-dog-in-a-hospital-picture-id465131587?k=20&m=465131587&s=612x612&w=0&h=nhR-dTWLbXPgEq69np89Zbh5aruCjkhdMN2egh_Kq_A=",
+        "price": 119
+    },
+    {
+        "name": "Pet sitting service",
+        "details": "No stress or worrying about your pet and home while you are traveling.",
+        "image": "https://www.fetchpetcare.com/wp-content/uploads/2020/12/pet-sitting-services-listing-1024x729.jpg",
+        "price": 94
+    }
+]
