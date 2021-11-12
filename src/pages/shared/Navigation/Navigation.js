@@ -18,6 +18,7 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import { NavLink } from 'react-router-dom';
 import { HomeMini } from '@mui/icons-material';
 import SvgIcon from '@mui/material/SvgIcon';
+import useAuth from '../../../hooks/useAuth';
 
 function HomeIcon(props) {
     return (
@@ -71,6 +72,11 @@ export default function PrimarySearchAppBar() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
+    //custom commands
+    const { user, logout } = useAuth();
+
+    //custom ends
+
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -90,6 +96,9 @@ export default function PrimarySearchAppBar() {
     const handleMobileMenuOpen = (event) => {
         setMobileMoreAnchorEl(event.currentTarget);
     };
+    const handleLogOut = () => {
+        logout();
+    }
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -111,6 +120,7 @@ export default function PrimarySearchAppBar() {
 
             <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
             <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+            <MenuItem onClick={handleLogOut}>Sign Out</MenuItem>
         </Menu>
     );
 
@@ -205,8 +215,15 @@ export default function PrimarySearchAppBar() {
                                 <NotificationsIcon />
                             </Badge>
                         </IconButton> */}
-                        <NavLink style={{ textDecoration: 'none', color: 'inherit', margin: 'auto 15px' }} to='/home'>Services</NavLink>
-                        <NavLink style={{ textDecoration: 'none', color: 'inherit', margin: 'auto 15px' }} to='/login'>Login</NavLink>
+                        <NavLink style={{ textDecoration: 'none', color: 'inherit', margin: 'auto 15px' }} to='/ourservices'>Services</NavLink>
+
+                        {
+                            user?.email ?
+                                <NavLink to="/" style={{ textDecoration: 'none', color: 'red', margin: 'auto 15px' }}>
+                                    ({user.displayName})</NavLink>
+                                :
+                                <NavLink style={{ textDecoration: 'none', color: 'inherit', margin: 'auto 15px' }} to='/login'>Login</NavLink>
+                        }
                         <IconButton
                             size="large"
                             edge="end"

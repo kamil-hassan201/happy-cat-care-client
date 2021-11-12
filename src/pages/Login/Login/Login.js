@@ -13,6 +13,10 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { NavLink } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
+import { useLocation, useHistory } from 'react-router-dom';
+
+
 
 function Copyright(props) {
     return (
@@ -30,14 +34,17 @@ function Copyright(props) {
 const theme = createTheme();
 
 const Login = () => {
+    const { sinInUser } = useAuth();
+    const location = useLocation();
+    const history = useHistory();
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         // eslint-disable-next-line no-console
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        const email = data.get('email');
+        const password = data.get('password');
+        sinInUser(email, password, location, history);
     };
 
     return (
