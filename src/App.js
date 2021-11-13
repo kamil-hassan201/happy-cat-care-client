@@ -1,12 +1,14 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 import ContextProvider from './context/ContextProvider/ContextProvider';
+import Dashboard from './pages/dashboard/Dashboard/Dashboard';
 import Home from './pages/home/Home/Home';
 import Login from './pages/Login/Login/Login';
 import Register from './pages/Login/Login/Register/Register';
+import ManageAppointments from './pages/ManageAppointments/ManageAppointments';
 import PlaceOrder from './pages/PlaceOrder/PlaceOrder/PlaceOrder';
-import OurServices from './pages/ServicesPage/OurServices/OurServices';
 import ServicePage from './pages/ServicesPage/ServicePage/ServicePage';
+import PrivateRoute from './pages/shared/PrivateRoute/PrivateRoute';
 
 function App() {
   return (
@@ -26,9 +28,13 @@ function App() {
             <Route path="/ourservices">
               <ServicePage></ServicePage>
             </Route>
-            <Route path="/placeorder/:id">
+            <PrivateRoute path="/placeorder/:id">
               <PlaceOrder></PlaceOrder>
-            </Route>
+            </PrivateRoute>
+
+            <PrivateRoute path="/dashboard">
+              <Dashboard></Dashboard>
+            </PrivateRoute>
             <Route path="/signup">
               <Register></Register>
             </Route>

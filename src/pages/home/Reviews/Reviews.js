@@ -1,19 +1,28 @@
 import { Container, Divider, Grid, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import Review from '../Review/Review';
 
 const Reviews = () => {
     const [reviews, setReviews] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:4000/reviews')
+            .then(res => res.json())
+            .then(data => setReviews(data))
+    }, [])
     return (
         <Container style={{ margin: '50px auto' }}>
 
             <Typography sx={{ letterSpacing: 6, my: 4 }} variant="h5">
                 Customer Reviews
             </Typography>
-            <Divider style={{ width: '70%', margin: '0 auto' }} />
-            <Grid style={{ margin: '20px auto' }} container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+            <Divider style={{ width: '30%', margin: '0 auto' }} />
+            <Grid style={{ margin: '40px auto' }} container rowSpacing={5} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
 
                 {
-
+                    reviews.map(rv => <Review
+                        key={rv._id}
+                        review={rv}
+                    ></Review>)
                 }
 
             </Grid>

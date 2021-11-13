@@ -34,7 +34,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 const Login = () => {
-    const { sinInUser } = useAuth();
+    const { sinInUser, authError } = useAuth();
     const location = useLocation();
     const history = useHistory();
 
@@ -81,6 +81,7 @@ const Login = () => {
                         <Typography component="h1" variant="h5">
                             Sign in
                         </Typography>
+
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                             <TextField
                                 margin="normal"
@@ -106,6 +107,10 @@ const Login = () => {
                                 control={<Checkbox value="remember" color="primary" />}
                                 label="Remember me"
                             />
+
+                            {
+                                authError && <div><small style={{ color: 'red' }}>{authError}</small></div>
+                            }
                             <Button
                                 type="submit"
                                 fullWidth

@@ -1,4 +1,4 @@
-import { Button, Card, CardActionArea, CardContent, CardMedia, Container, Divider, Grid, TextField, Typography } from '@mui/material';
+import { Alert, AlertTitle, Button, Card, CardActionArea, CardContent, CardMedia, Container, Divider, Grid, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
@@ -7,10 +7,11 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
 import MobileDatePicker from '@mui/lab/MobileDatePicker';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 const PlaceOrder = () => {
     const id = useParams();
     const { user } = useAuth();
+    const history = useHistory();
     const [service, setService] = useState({});
     const [date, setDate] = React.useState(new Date());
     const uri = `http://localhost:4000/services/${id.id}`;
@@ -18,15 +19,26 @@ const PlaceOrder = () => {
         customerEmail: user.email,
         customerName: user.displayName,
         date: date.toLocaleDateString(),
+        status: 'Pending',
         service: service,
     });
+    // console.log("placeholder line 23 ", appointment);
 
-
+    //fetch service
     useEffect(() => {
         fetch(uri)
             .then(res => res.json())
-            .then(data => setService(data))
+            .then(data => {
+                setService(data)
+            })
     }, [])
+    //reload appointment
+    useEffect(() => {
+        const newAppointment = { ...appointment };
+        newAppointment.service = service;
+        setAppointment(newAppointment);
+    }, [service])
+
     const handleOnBlur = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -34,6 +46,7 @@ const PlaceOrder = () => {
         newAppointment[name] = value;
         setAppointment(newAppointment);
     }
+    //set date
     const handleChange = (newValue) => {
         setDate(newValue);
         const newAppointment = { ...appointment };
@@ -42,7 +55,21 @@ const PlaceOrder = () => {
 
     }
     const handleFixAppointment = () => {
-        console.log(appointment);
+
+        fetch('http://localhost:4000/appointment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(appointment)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    alert("Appointment Fixed Successfully");
+                    history.replace('/ourservices')
+                }
+            });
     }
     return (
         <>
@@ -80,6 +107,7 @@ const PlaceOrder = () => {
                                     label="Appointment Date"
                                     inputFormat="dd/MM/yyyy"
                                     value={date}
+
                                     onChange={handleChange}
 
 

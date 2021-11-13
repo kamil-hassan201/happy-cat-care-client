@@ -33,7 +33,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 const Register = () => {
-    const { user, registerUser } = useAuth();
+    const { user, registerUser, authError } = useAuth();
     const history = useHistory();
 
     const handleSubmit = (event) => {
@@ -111,14 +111,16 @@ const Register = () => {
                                 id="password"
                                 autoComplete="current-password"
                             />
-
+                            {
+                                authError && <div><small style={{ color: 'red' }}>{authError}</small></div>
+                            }
                             <Button
                                 type="submit"
                                 fullWidth
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2 }}
                             >
-                                Sign In
+                                Sign Up
                             </Button>
                             <Grid container>
 

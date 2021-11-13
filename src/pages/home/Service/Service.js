@@ -8,7 +8,7 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 
 const Service = (props) => {
     const { name, details, image, price, _id } = props.service;
-    console.log(props.service);
+
     const { handleMakeAppoinment } = props;
     return (
         <Grid item xs={12} sm={6} md={4}>
@@ -26,6 +26,9 @@ const Service = (props) => {
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
                             {details}
+                        </Typography>
+                        <Typography variant="body1" sx={{ color: '#ebb434', mt: 2 }}>
+                            ${price}/ visit
                         </Typography>
                     </CardContent>
                 </CardActionArea>

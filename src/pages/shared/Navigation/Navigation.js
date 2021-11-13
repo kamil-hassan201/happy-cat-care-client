@@ -219,8 +219,8 @@ export default function PrimarySearchAppBar() {
 
                         {
                             user?.email ?
-                                <NavLink to="/" style={{ textDecoration: 'none', color: 'red', margin: 'auto 15px' }}>
-                                    ({user.displayName})</NavLink>
+                                <><NavLink style={{ textDecoration: 'none', color: 'inherit', margin: 'auto 15px' }} to='/dashboard'>DashBoard</NavLink><NavLink to="/" style={{ textDecoration: 'none', color: 'red', margin: 'auto 15px' }}>
+                                    ({user.displayName})</NavLink></>
                                 :
                                 <NavLink style={{ textDecoration: 'none', color: 'inherit', margin: 'auto 15px' }} to='/login'>Login</NavLink>
                         }
