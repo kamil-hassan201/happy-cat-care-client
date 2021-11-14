@@ -24,7 +24,7 @@ const ManageAppointment = (props) => {
         else {
             status = 'Pending'
         }
-        const uri = `http://localhost:4000/appointment/${_id}`
+        const uri = `https://tranquil-dusk-11890.herokuapp.com/appointment/${_id}`
         fetch(uri, {
             method: 'PUT',
             headers: {
@@ -38,16 +38,16 @@ const ManageAppointment = (props) => {
 
     return (
         <Card sx={{ maxWidth: "80%", mt: 5, mx: 'auto' }}>
-            <CardActionArea sx={{ display: 'flex' }}>
+            <CardActionArea sx={{ display: { md: 'flex' } }}>
                 <CardMedia
-                    sx={{ width: "35%" }}
+                    sx={{ width: { md: "35%" } }}
                     component="img"
                     height="200"
 
                     image={service.image}
                     alt="green iguana"
                 />
-                <CardContent sx={{ width: "40%" }} >
+                <CardContent sx={{ width: { md: "40%" } }} >
                     <Typography gutterBottom variant="h5" component="div">
                         {service.name}
                     </Typography>
@@ -74,7 +74,7 @@ const ManageAppointment = (props) => {
                             <span style={{ color: '#f2b022' }}>Pending</span>
                             :
                             <span style={{ color: 'green' }}>Done </span>
-                    }
+                    } <br />
                     <Button onClick={() => handleRemove(_id)} size="small" sx={{ color: '#ff3030', my: 2 }}>
                         Remove Appointment
                     </Button>

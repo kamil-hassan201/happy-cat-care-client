@@ -6,7 +6,7 @@ import useAuth from '../../../hooks/useAuth';
 const MakeAdmin = () => {
     const { register, handleSubmit, reset } = useForm();
     const onSubmit = data => {
-        fetch('http://localhost:4000/users/admin', {
+        fetch('https://tranquil-dusk-11890.herokuapp.com/users/admin', {
             method: 'PUT',
             headers: {
                 'Content-type': 'application/json'

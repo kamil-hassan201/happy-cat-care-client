@@ -7,9 +7,9 @@ const MyAppointment = (props) => {
     return (
         <div>
             <Card sx={{ maxWidth: "80%", mt: 5, mx: 'auto' }}>
-                <CardActionArea sx={{ display: 'flex', mt: 3 }}>
+                <CardActionArea sx={{ display: { md: 'flex' }, mt: 3 }}>
 
-                    <CardContent sx={{ width: "50%", mx: 'auto' }} >
+                    <CardContent sx={{ width: { md: "50%" }, mx: 'auto' }} >
                         <Typography gutterBottom variant="h5" component="div">
                             {service.name}
                         </Typography>
@@ -20,7 +20,7 @@ const MyAppointment = (props) => {
                         <Typography sx={{ mb: 3 }} variant="body2" color="inherit">
                             {customerEmail}
                         </Typography>
-                        <Typography style={{ whiteSpace: "nowrap" }} variant="body3" color="text.secondary">
+                        <Typography style={{ whiteSpace: { md: "nowrap" } }} variant="body3" color="text.secondary">
                             Appointment Id: {_id}
                         </Typography>
                         {
@@ -34,7 +34,7 @@ const MyAppointment = (props) => {
                         }
                     </CardContent>
                     <CardMedia
-                        sx={{ width: "45%", mx: 4 }}
+                        sx={{ width: { md: "45%" }, mx: 4 }}
                         component="img"
                         height="250"
 

@@ -1,20 +1,29 @@
 import { Container, Divider, Grid } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
+import UpdateServiceModal from '../../ManageAppointments/UpdateServiceModal';
 import ManageService from '../ManageService/ManageService';
 
 const ManageServices = () => {
     const [services, setServices] = useState([]);
+    const [updateService, setUpdateService] = useState({});
+
+    const [openModal, setOpenModal] = React.useState(false);
+    const handleOpenModal = (id) => {
+        const service = services.find(sv => sv._id == id);
+        setUpdateService(service);
+        setOpenModal(true)
+    };
 
     useEffect(() => {
-        fetch('http://localhost:4000/services')
+        fetch('https://tranquil-dusk-11890.herokuapp.com/services')
             .then(res => res.json())
             .then(data => setServices(data));
     }, [])
     const handleDelete = (id) => {
         const proceed = window.confirm(`Are you sure you want to Remove The Service with id ${id}`);
         if (proceed) {
-            const uri = `http://localhost:4000/service/${id}`
+            const uri = `https://tranquil-dusk-11890.herokuapp.com/service/${id}`
             fetch(uri, {
                 method: 'DELETE'
             })
@@ -22,7 +31,7 @@ const ManageServices = () => {
                 .then(data => {
                     if (data.deletedCount) {
                         alert("Appointment Removed");
-                        const newServices = services.filter(sv => sv._id != id)
+                        const newServices = services.filter(sv => sv._id !== id)
                         setServices(newServices);
                     }
                 })
@@ -39,9 +48,15 @@ const ManageServices = () => {
                         key={sv._id}
                         service={sv}
                         handleDelete={handleDelete}
+                        handleOpenModal={handleOpenModal}
                     ></ManageService>)
                 }
             </Grid>
+            <UpdateServiceModal
+                service={updateService}
+                openModal={openModal}
+                setOpenModal={setOpenModal}
+            ></UpdateServiceModal>
         </Container>
     );
 };

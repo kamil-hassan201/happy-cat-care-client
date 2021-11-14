@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 const AddService = () => {
     const { register, handleSubmit, reset } = useForm();
     const onSubmit = data => {
-        fetch('http://localhost:4000/service', {
+        fetch('https://tranquil-dusk-11890.herokuapp.com/service', {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
@@ -18,6 +18,9 @@ const AddService = () => {
                     alert('Service Added');
                     reset();
                 }
+                else {
+                    alert("Nothing Updated");
+                }
             })
     };
     return (
@@ -25,7 +28,7 @@ const AddService = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <TextField required
                     sx={{ width: '75%', my: 3 }}
-                    label="Service Name" {...register("name", { required: true, maxLength: 20 })} /> <br />
+                    label="Service Name" {...register("name", { required: true, maxLength: 40 })} /> <br />
                 <TextField required
                     multiline
                     rows={5}

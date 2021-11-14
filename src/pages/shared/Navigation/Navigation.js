@@ -19,6 +19,9 @@ import { NavLink } from 'react-router-dom';
 import { HomeMini } from '@mui/icons-material';
 import SvgIcon from '@mui/material/SvgIcon';
 import useAuth from '../../../hooks/useAuth';
+import { useHistory } from 'react-router';
+import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 function HomeIcon(props) {
     return (
@@ -72,8 +75,10 @@ export default function PrimarySearchAppBar() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
+
     //custom commands
     const { user, logout } = useAuth();
+    const history = useHistory();
 
     //custom ends
 
@@ -118,9 +123,11 @@ export default function PrimarySearchAppBar() {
             onClose={handleMenuClose}
         >
 
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-            <MenuItem onClick={handleLogOut}>Sign Out</MenuItem>
+            <MenuItem onClick={handleMenuClose}>{user?.displayName}</MenuItem>
+
+            {
+                user.email ? <MenuItem onClick={handleLogOut}>Sign Out</MenuItem> :
+                    <MenuItem onClick={() => history.push("/login")}>Sign In</MenuItem>}
         </Menu>
     );
 
@@ -156,11 +163,23 @@ export default function PrimarySearchAppBar() {
                     color="inherit"
                 >
                     <Badge badgeContent={17} color="error">
-                        <NotificationsIcon />
+                        <MiscellaneousServicesIcon />
                     </Badge>
                 </IconButton>
-                <p>Notifications</p>
+                <NavLink style={{ textDecoration: 'none', color: 'inherit', margin: 'auto 15px' }} to='/ourservices'>Services</NavLink>
             </MenuItem>
+            {user.email && <MenuItem>
+                <IconButton
+                    size="large"
+                    aria-label="show 17 new notifications"
+                    color="inherit"
+                >
+                    <Badge badgeContent={17} color="error">
+                        <DashboardIcon />
+                    </Badge>
+                </IconButton>
+                <NavLink style={{ textDecoration: 'none', color: 'inherit', margin: 'auto 15px' }} to='/dashboard'>Dashboard</NavLink>
+            </MenuItem>}
             <MenuItem onClick={handleProfileMenuOpen}>
                 <IconButton
                     size="large"
@@ -219,8 +238,7 @@ export default function PrimarySearchAppBar() {
 
                         {
                             user?.email ?
-                                <><NavLink style={{ textDecoration: 'none', color: 'inherit', margin: 'auto 15px' }} to='/dashboard'>DashBoard</NavLink><NavLink to="/" style={{ textDecoration: 'none', color: 'red', margin: 'auto 15px' }}>
-                                    ({user.displayName})</NavLink></>
+                                <NavLink style={{ textDecoration: 'none', color: 'inherit', margin: 'auto 15px' }} to='/dashboard'>DashBoard</NavLink>
                                 :
                                 <NavLink style={{ textDecoration: 'none', color: 'inherit', margin: 'auto 15px' }} to='/login'>Login</NavLink>
                         }

@@ -57,7 +57,7 @@ const useFirebase = () => {
                 setUser(user);
                 setIsLoading(true);
 
-                fetch(`http://localhost:4000/users/${user.email}`)
+                fetch(`https://tranquil-dusk-11890.herokuapp.com/users/${user.email}`)
                     .then(res => res.json())
                     .then(data => {
                         setAdmin(data.admin)
@@ -83,7 +83,7 @@ const useFirebase = () => {
     // save user to database
     const saveUser = (user) => {
         console.log(user);
-        fetch('http://localhost:4000/users', {
+        fetch('https://tranquil-dusk-11890.herokuapp.com/users', {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
@@ -97,7 +97,7 @@ const useFirebase = () => {
     //     setIsLoading(true);
     //     console.log("admin call calling");
     //     console.log("Email", user.email);
-    //     fetch(`http://localhost:4000/users/${user.email}`)
+    //     fetch(`https://tranquil-dusk-11890.herokuapp.com/users/${user.email}`)
     //         .then(res => res.json())
     //         .then(data => {
     //             setAdmin(data.admin)

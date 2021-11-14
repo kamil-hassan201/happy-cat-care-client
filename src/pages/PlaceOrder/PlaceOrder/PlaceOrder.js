@@ -14,7 +14,7 @@ const PlaceOrder = () => {
     const history = useHistory();
     const [service, setService] = useState({});
     const [date, setDate] = React.useState(new Date());
-    const uri = `http://localhost:4000/services/${id.id}`;
+    const uri = `https://tranquil-dusk-11890.herokuapp.com/services/${id.id}`;
     const [appointment, setAppointment] = useState({
         customerEmail: user.email,
         customerName: user.displayName,
@@ -56,7 +56,7 @@ const PlaceOrder = () => {
     }
     const handleFixAppointment = () => {
 
-        fetch('http://localhost:4000/appointment', {
+        fetch('https://tranquil-dusk-11890.herokuapp.com/appointment', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

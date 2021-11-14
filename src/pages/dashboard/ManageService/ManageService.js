@@ -8,7 +8,7 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 
 const ManageService = (props) => {
     const { name, details, image, price, _id } = props.service;
-    const { handleDelete } = props;
+    const { handleDelete, handleOpenModal } = props;
     return (
 
         <Grid item xs={12} sm={6} md={4}>
@@ -33,12 +33,9 @@ const ManageService = (props) => {
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                    <Button
-
-                        variant="contained"
+                    <Button onClick={() => handleOpenModal(_id)} variant="contained"
                         sx={{ mx: 'auto' }} size="small" color="primary">
-                        Update
-                    </Button>
+                        Update</Button>
                     <Button
                         onClick={() => handleDelete(_id)}
                         variant="contained"

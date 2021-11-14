@@ -9,7 +9,7 @@ const AddReview = () => {
     const [value, setValue] = React.useState(0);
     const onSubmit = data => {
         data.rating = value;
-        fetch('http://localhost:4000/review', {
+        fetch('https://tranquil-dusk-11890.herokuapp.com/review', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

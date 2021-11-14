@@ -7,14 +7,14 @@ const MyOrders = () => {
     const [appointments, setAppointments] = useState([]);
     const { user } = useAuth();
     useEffect(() => {
-        fetch(`http://localhost:4000/appointments?email=${user.email}`)
+        fetch(`https://tranquil-dusk-11890.herokuapp.com/appointments?email=${user.email}`)
             .then(res => res.json())
             .then(data => setAppointments(data))
     }, [])
     const handleRemove = (id) => {
         const proceed = window.confirm(`Are you sure you want to remove appointment with id ${id}`);
         if (proceed) {
-            const uri = `http://localhost:4000/appointment/${id}`
+            const uri = `https://tranquil-dusk-11890.herokuapp.com/appointment/${id}`
             fetch(uri, {
                 method: 'DELETE'
             })
