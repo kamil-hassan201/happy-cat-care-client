@@ -17,6 +17,9 @@ const theme = createTheme({
   palette: {
     primary: deepPurple,
     secondary: pink
+  },
+  typography: {
+    fontFamily: 'Quicksand',
   }
 })
 

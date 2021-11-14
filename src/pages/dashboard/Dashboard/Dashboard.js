@@ -40,6 +40,7 @@ import AdminRoute from '../../shared/PrivateRoute/AdminRoute';
 import PrivateRoute from '../../shared/PrivateRoute/PrivateRoute';
 import useAuth from '../../../hooks/useAuth';
 import { Button } from '@mui/material';
+import ManageServices from '../ManageServices/ManageServices';
 
 const drawerWidth = 260;
 
@@ -71,16 +72,14 @@ function Dashboard(props) {
                     </NavLink>
                     <NavLink style={{ color: 'inherit', textDecoration: 'none' }} to={`${url}/addservice`}>
                         <ListItem button >
-
                             <ListItemIcon>
                                 <AddCircleOutlinedIcon />
                             </ListItemIcon>
                             <ListItemText primary="Add a Service" />
                         </ListItem>
                     </NavLink>
-                    <NavLink style={{ color: 'inherit', textDecoration: 'none' }} to="/">
+                    <NavLink style={{ color: 'inherit', textDecoration: 'none' }} to={`${url}/manageservices`}>
                         <ListItem button >
-
                             <ListItemIcon>
                                 <MiscellaneousServicesOutlinedIcon />
                             </ListItemIcon>
@@ -136,9 +135,9 @@ function Dashboard(props) {
     const container = window !== undefined ? () => window().document.body : undefined;
 
     return (
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex', }}>
             <CssBaseline />
-            <AppBar style={{}}
+            <AppBar
                 position="fixed"
                 sx={{
                     width: { sm: `calc(100% - ${drawerWidth}px)` },
@@ -210,6 +209,9 @@ function Dashboard(props) {
                     </AdminRoute>
                     <AdminRoute exact path={`${path}/makeadmin`}>
                         <MakeAdmin></MakeAdmin>
+                    </AdminRoute>
+                    <AdminRoute exact path={`${path}/manageservices`}>
+                        <ManageServices></ManageServices>
                     </AdminRoute>
                     <Route exact path={`${path}/myorders`}>
                         <MyOrders></MyOrders>

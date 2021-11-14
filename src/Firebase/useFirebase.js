@@ -55,6 +55,14 @@ const useFirebase = () => {
         const unsubscribed = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user);
+                setIsLoading(true);
+
+                fetch(`http://localhost:4000/users/${user.email}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        setAdmin(data.admin)
+                        setIsLoading(false);
+                    })
             }
             setIsLoading(false);
         });
@@ -85,11 +93,18 @@ const useFirebase = () => {
             .then(res => res.json())
             .then(data => console.log(data));
     }
-    useEffect(() => {
-        fetch(`http://localhost:4000/users/${user.email}`)
-            .then(res => res.json())
-            .then(data => setAdmin(data.admin))
-    }, [user.email])
+    // useEffect(() => {
+    //     setIsLoading(true);
+    //     console.log("admin call calling");
+    //     console.log("Email", user.email);
+    //     fetch(`http://localhost:4000/users/${user.email}`)
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             setAdmin(data.admin)
+    //             console.log(admin)
+    //             setIsLoading(false);
+    //         })
+    // }, [user.email, admin])
 
 
     return {

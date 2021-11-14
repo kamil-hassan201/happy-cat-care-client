@@ -6,9 +6,11 @@ import Skeleton from '@mui/material/Skeleton';
 
 const AdminRoute = ({ children, ...rest }) => {
     const { user, isLoading, admin } = useAuth();
-    if (isLoading) {
+    console.log("in admin route", user?.email);
+    console.log("loading: ", isLoading, "admin", admin);
+    if (isLoading || !admin) {
         return (
-            <Box sx={{ width: 300 }}>
+            <Box sx={{ width: 600, height: 800 }}>
                 <Skeleton />
                 <Skeleton animation="wave" />
                 <Skeleton animation={false} />
